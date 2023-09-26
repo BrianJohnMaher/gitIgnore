@@ -1,22 +1,4 @@
 
-var data = {
-    name: 'JD',
-    age: 43,
-    printName: () => {
-console.log(this.name);
-    },
-// printNameStandard: function() {
-    
-// }
-
-
-
-};
-
-data.printName();
-
-
-
 
 
 
