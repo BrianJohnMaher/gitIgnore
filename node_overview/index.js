@@ -1,55 +1,122 @@
 const fs = require('fs');
-const colors = require('colors');
-const option = process.argv[2];
-const studentName = process.argv[3];
+const inquirer = require('inquirer');
+const tools = require('./lib/generate.js');
 
-// Overwrites the file, does not maintain old file
-// fs.writeFile('./students.txt', 'Gabby', (err) => {
-//     if (err) throw err;
+function init() {
+inquirer.prompt([
+    {
+    name: 'title',
+    message: 'Please provide your project title.'
+    },
+    {
+    name: 'description',
+    message: 'Please provide your project description.'
+    },
+    {
+    name: 'image',
+    message: 'Please provide a url to your image.'
+    }
+    {
+    name: 'license',
+    message: 'Please choose the license you woud like.',
+    type: 'list',
+    choices: ['MIT', 'ISC', 'GNU']
+    }
 
-//     console.log('file written successfully');
+]).then(tools.generateReadme);
+}
+
+function init() {
+    tools.anotherFunc();
+    promptUser();
+}
+
+
+init();
+
+
+
+
+
+
+
+
+
+
+
+//     type: 'confirm',
+//     name: 'darkMode',
+//     message: 'Would you like dark mode?'
+// },
+
+
+
+// function generateHTML(answerObj) {
+//     const html = `
+//     <!DOCTYPE html>
+//     <html>
+//      <head>
+//         <title>${answerObj.userTitle}</title>
+//     </head>
+//     <body style="background-color: ${answerObj.darkMode ? '#555' : 'white'}; color: ${answerObj.darkMode ? 'white' : '#000'}">
+//         <h1>${answerObj.headerText}</h1>
+//      </body>
+//  </html>
+//  `;
+
+
+// fs.writeFile('./index.html', html.trim(), (err) => {
+//      if (err) throw err;
+
+//     console.log('File created successfully');
 // });
-
-if (option === 'add') {
-    fs.appendFile('./students.txt', studentName + '\n', (err) => {
-        if (err) throw err;
-    
-        console.log('file appended successfully');
-    });
-}
-
-if (option === 'list') {
-    fs.readFile('./students.txt', 'utf8', (err, data) => {
-        if (err) throw err;
-    
-        // Must do this to get rid of the \r in each string of the array 
-        // var names = data.trim().replace(/\r/g, '').split('\n');
-        const names = data.trim().split(/\r?\n/);
-    
-        // names.forEach((name, index) => {
-        //     console.log(name, index);
-        // });
-
-        // Loops over each item in the array and returns a NEW array
-        // Allows you to mutate the original array and change each item to something else
-        const changedArray = names.map(name => {
-            return '- ' + name + '\n';
-        });
-
-        // Join all of the array items together into one string by empty string (can change that delimiter to anything)
-        const output = changedArray.join('');
-
-        console.log('\n---Student List---\n');
-        // console.log(colors.rainbow(output));
-        console.log(output.cyan);
-    });
-}
+// }
 
 
 
 
 
 
+// }
+
+
+// }).then(generateHTML);
+
+
+
+
+
+// const html = `
+// <!DOCTYPE html>
+// <html>
+//     <head>
+//         <title>${title}</title>
+//     </head>
+//     <body>
+//         <h1>Main Header</h1>
+//     </body>
+// </html>
+// `;
+
+// 
+
+
+
+
+// function generateReadme(answerObj) {
+//     const md = `
+//     # ${answerObj.title}
+//     ## Description
+//     ${answerObj.description}
+//     ![Dev Profile Image](${answerObj.image})
+//     `;
+
+//     fs.writeFile('./README.md', md.trim(), (err) => {
+//         if (err) throw err;
+
+//         console.log('File created Successfully!');
+//     });
+// }
 
 
 
@@ -158,6 +225,4 @@ if (option === 'list') {
 // data =['one', 'two'];
 
 // console.log(data);
-
-
 
